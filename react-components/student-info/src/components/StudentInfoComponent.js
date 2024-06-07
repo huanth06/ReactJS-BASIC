@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 const students = [
     {
         id: 1,
@@ -25,8 +25,9 @@ const students = [
         address: 'TPHCM'
     },
 ]
-
-export default function StudentInfoComponent() {
+export default class StudentInfoComponent extends Component {
+ 
+  render() {
     return (
         <div>
             <table>
@@ -48,4 +49,5 @@ export default function StudentInfoComponent() {
             </table>
         </div>
     )
+  }
 }
