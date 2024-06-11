@@ -24,7 +24,6 @@ export default class App  extends Component {
   handleChangeCheckbox = () => {
     this.setState((state) => {
       const { form } = state
-      console.log(form);
       form.isRemember = !form.isRemember
       return { form }
     }, () => this.checkValidForm())
