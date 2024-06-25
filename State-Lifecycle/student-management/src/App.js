@@ -21,7 +21,11 @@ export default class App extends Component {
   }
   handleSelect = (studentSelected, index) => {
     this.setState({
-      form: JSON.parse(JSON.stringify(studentSelected)),
+      form: {
+        name: studentSelected.name,
+        phone: studentSelected.phone,
+        email: studentSelected.email
+      },
       indexSelected: index
     })
   }
@@ -36,17 +40,21 @@ export default class App extends Component {
     if (this.state.isValid) {
       const newList = this.state.studentList
       if (this.state.indexSelected > -1) {
-
+        newList.splice(this.state.indexSelected,1,this.state.form)
       } else {
         newList.push(this.state.form);
       }
       this.setState({
         form: { name: '', phone: '', email: '' }
       })
-      console.log(this.state);
     }
   }
   handleDelete = (index) => {
+    const newList = this.state.studentList;
+    newList.splice(index,1);
+    this.setState({
+      studentList: newList
+    });
   }
   render() {
     const { studentList, form } = this.state
@@ -75,6 +83,7 @@ export default class App extends Component {
                 <td>Phone</td>
                 <td>Email</td>
                 <td></td>
+                <td></td>
               </tr>
             </thead>
             <tbody>
@@ -84,11 +93,12 @@ export default class App extends Component {
                 */ }
                 {
                   this.state.studentList.map((item,i)=>(
-                    <tr>
+                    <tr key={i}>
                       <td>{item.name}</td>
                       <td>{item.phone}</td>
                       <td>{item.email}</td>
-                      <td><button onClick={this.handleSelect()}>Edit</button></td>
+                      <td><button onClick={()=>{this.handleSelect(item,i)}}>Edit</button></td>
+                      <td><button onClick={()=>{this.handleDelete(i)}}>Delete</button></td>
                     </tr>
                   ))
                 }
