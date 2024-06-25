@@ -15,7 +15,7 @@ export default function Login() {
         }
         onSubmit={values=>{
           if(values.email === 'admin@gmail.com' && values.password==='letmein'){
-            alert("Loged in successfully!");
+            alert("Logged in successfully!");
             navigate('/home');
           }
         }}
